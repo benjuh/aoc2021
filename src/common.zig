@@ -12,7 +12,34 @@ const NANOSECONDS_PER_SECOND = 1000000000;
 const NANOSECONDS_PER_MILLISECOND = 1000000;
 const NANOSECONDS_PER_MICROSECOND = 1000;
 
+pub fn get_ints(comptime T: type, line: []const u8, allocator: std.mem.Allocator, delimiter: []const u8) ![]T {
+    var nums = std.ArrayList(T).init(allocator);
+    var iter = std.mem.tokenizeAny(u8, line, delimiter);
+    while (iter.next()) |num| {
+        const n = std.fmt.parseInt(T, num, 10) catch unreachable;
+        try nums.append(n);
+    }
+    return nums.toOwnedSlice();
+}
+
 pub fn get_lines(comptime day: usize, allocator: std.mem.Allocator, comptime test_data: bool) [][]const u8 {
+    var data: []const u8 = undefined;
+    if (test_data) {
+        data = @embedFile("data/test/day" ++ std.fmt.comptimePrint("{d}.txt", .{day}));
+    } else {
+        data = @embedFile("data/day" ++ std.fmt.comptimePrint("{d}.txt", .{day}));
+    }
+    var lines = std.ArrayList([]const u8).init(allocator);
+    var iter = std.mem.splitAny(u8, data, "\n");
+    while (iter.next()) |line| {
+        const new_line = std.mem.trim(u8, line, " ");
+        lines.append(new_line) catch unreachable;
+    }
+    if (lines.items[lines.items.len - 1].len == 0) _ = lines.pop();
+    return lines.items;
+}
+
+pub fn get_lines_no_strip(comptime day: usize, allocator: std.mem.Allocator, comptime test_data: bool) [][]const u8 {
     var data: []const u8 = undefined;
     if (test_data) {
         data = @embedFile("data/test/day" ++ std.fmt.comptimePrint("{d}.txt", .{day}));
