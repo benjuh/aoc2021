@@ -1,0 +1,7 @@
+data/
+test/
+*.txt
+.zig-cache
+.zig-cache/*
+zig-out
+zig-out/
