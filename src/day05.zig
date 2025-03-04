@@ -41,12 +41,12 @@ const Range = struct {
     }
 
     fn get_slope(start: Point, end: Point) slope {
-        const start_x: i64 = @intCast(start[0]);
-        const start_y: i64 = @intCast(start[1]);
-        const end_x: i64 = @intCast(end[0]);
-        const end_y: i64 = @intCast(end[1]);
-        const dy: i64 = end_y - start_y;
-        const dx: i64 = end_x - start_x;
+        const start_x: i12 = @intCast(start[0]);
+        const start_y: i12 = @intCast(start[1]);
+        const end_x: i12 = @intCast(end[0]);
+        const end_y: i12 = @intCast(end[1]);
+        const dy: i12 = end_y - start_y;
+        const dx: i12 = end_x - start_x;
         return switch (dx) {
             0 => slope.vertical,
             else => {
