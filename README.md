@@ -6,6 +6,7 @@ This is my solution to the [Advent of Code 2021](https://adventofcode.com/2021) 
 
 To run the solution, you need to have [Zig](https://ziglang.org/) installed.
 
+**NOTE: You will need to put your own data files in the `src/data/day{x}.txt` files. I can not distribute the data files with this repo as it goes against AoC terms of service.**
 ```bash
 # Running all solutions
 zig build run
