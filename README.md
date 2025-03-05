@@ -22,4 +22,10 @@ zig build run -- 1-4
 
 # Running all days except for some. This example runs all days EXCEPT 1, 2, and 3
 zig build run -- except 1 2 3
+
+# Running fast (just add the -Doptimize=ReleaseFast flag... this takes longer to compile but runs way faster)
+zig build run -Doptimize=ReleaseFast -- 1
+zig build run -Doptimize=ReleaseFast -- 1 2 3 4
+zig build run -Doptimize=ReleaseFast -- 1-8
+zig build run -Doptimize=ReleaseFast -- except 1 2 3
 ```
